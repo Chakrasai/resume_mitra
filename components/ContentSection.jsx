@@ -1,4 +1,7 @@
 import AboutmeInput from "./AboutmeInput";
+import AppreciationInput from "./AppreciationInput";
+import EducationInput from "./EducationInput";
+import SkillsInput from "./SkillInput";
 import WorkInput from "./WorkInput";
 
 function ContentSection({ selected }) {
@@ -11,9 +14,9 @@ return (
       {selected === "Work Experience" && (
         <WorkInput />
       )}
-      {selected === "Education" && <p>This section will contain education details.</p>}
-      {selected === "Skill" && <p>This section will contain skill inputs.</p>}
-      {selected === "Appreciation" && <p>This section will contain appreciation details.</p>}
+      {selected === "Education" && <EducationInput />}
+      {selected === "Skill" && <SkillsInput />}
+      {selected === "Appreciation" && <AppreciationInput />}
     </div>
   );
 }

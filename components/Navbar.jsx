@@ -1,7 +1,9 @@
-import React from 'react';
+
 import 'remixicon/fonts/remixicon.css'; // Import Remix icons CSS
 import './Navbar.css'; 
 function Navbar() {
+  // Removed unused menuOpen state
+
   return (
     <nav className="navbar">
       <div className="navbar-left">
@@ -13,6 +15,7 @@ function Navbar() {
         />
         <h2 className="brand-name">Resume Mitra</h2>
       </div>
+      
       <ul className="navbar-right">
         <li className="nav-item">
           <i className="ri-settings-3-fill"></i>
