@@ -30,7 +30,7 @@ function AppreciationInput() {
       </p>
 
       <div className="flex flex-col md:flex-row gap-4 items-start mb-4">
-        {/* Wrapper div for controlled input logic */}
+        
         <div className="w-full md:w-2/3">
           <InputFeild
             name=""
@@ -55,7 +55,7 @@ function AppreciationInput() {
         </button>
       </div>
 
-      {/* Display certificate list */}
+      
       <ul className="space-y-2">
         {certificates.map((cert, index) => (
           <li

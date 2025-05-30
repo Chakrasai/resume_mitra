@@ -21,7 +21,7 @@ function FormNavigator() {
 
   return (
     <div className="p-4">
-      {/* Section Tabs */}
+      
       <div className="flex flex-wrap gap-4 mb-4">
         {sections.map((section, index) => (
           <button
@@ -38,10 +38,10 @@ function FormNavigator() {
         ))}
       </div>
 
-      {/* Current Component Render */}
+      
       <div className="mb-6">{sections[currentIndex].component}</div>
 
-      {/* Navigation Buttons */}
+      
       <div className="flex justify-between">
         <button
           onClick={goBack}

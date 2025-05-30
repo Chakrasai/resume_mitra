@@ -2,7 +2,7 @@
 import 'remixicon/fonts/remixicon.css'; // Import Remix icons CSS
 import './Navbar.css'; 
 function Navbar() {
-  // Removed unused menuOpen state
+  
 
   return (
     <nav className="navbar">

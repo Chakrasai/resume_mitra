@@ -5,7 +5,7 @@ function WorkInput() {
   return (
     <div className="flex flex-col gap-6">
 
-      {/* Displayed Work Experience Summary */}
+      
       <div className="border border-[#20B2AA] p-4 rounded-lg">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <ul>
@@ -28,7 +28,7 @@ function WorkInput() {
         </p>
       </div>
 
-      {/* Work Experience Form Inputs */}
+      
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <label className="flex flex-col gap-1 text-sm text-[#303030]/90">
           Job Title
@@ -44,7 +44,7 @@ function WorkInput() {
         </label>
       </div>
 
-      {/* Date Range Inputs */}
+      
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="grid grid-cols-2 gap-2">
           <label className="flex flex-col gap-1 text-sm text-[#303030]/90">
@@ -68,13 +68,13 @@ function WorkInput() {
         </div>
       </div>
 
-      {/* Currently Working Checkbox */}
+      
       <label className="flex items-center gap-2 text-sm text-[#303030]/90 mt-2">
         <input type="checkbox" className="accent-[#20B2AA]" />
         I'm Currently working
       </label>
 
-      {/* Description TextArea */}
+      
       <div className="border border-[#20B2AA] rounded-lg p-3 shadow-sm">
         <label className="flex flex-col gap-1 text-sm text-[#303030]/90 w-full">
           Description
