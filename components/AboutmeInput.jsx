@@ -3,7 +3,7 @@ import InputFeild from './InputFeild';
 
 function AboutmeInput() {
   return (
-    <div className="p-4 sm:p-6 rounded-md bg-white space-y-6 max-w-5xl mx-auto w-full">
+    <div className="p-4 sm:p-6 rounded-md bg-white space-y-6 max-w-5xl mx-auto w-full" style={{ maxHeight: '80vh', overflowY: 'auto' }}>
       
       <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
         <div className="flex flex-col items-center">

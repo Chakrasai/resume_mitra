@@ -15,22 +15,31 @@ const menuItems = [
   { label: "Appreciation", icon: <RiAwardLine /> },
 ];
 
-function Sidebar({ selected, setSelected, isOpen }) {
+function Sidebar({ selected, setSelected, isOpen, setIsOpen }) {
+  const handleMenuItemClick = (label) => {
+    setSelected(label);
+
+   
+    if (window.innerWidth < 768) {
+      setIsOpen(false);
+    }
+  };
+
   return (
     <div
       className={`
         bg-teal-600 text-white p-6 flex flex-col gap-6 w-64
-        fixed md:static top-16 left-0 z-40 h-[calc(100vh-4rem)]
-        rounded-r-lg
+        fixed md:static top-16 left-0 z-40 h-full
         transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}
         md:translate-x-0
-  `}
->
+      `}
+      style={{ borderTopRightRadius: '10px', borderBottomRightRadius: '10px', border: '1px solid rgba(255, 255, 255, 0.1)' }}
+    >
       {menuItems.map((item) => (
         <button
           key={item.label}
-          onClick={() => setSelected(item.label)}
+          onClick={() => handleMenuItemClick(item.label)}
           className={`flex items-center gap-3 p-3 rounded-md text-left transition ${
             selected === item.label
               ? "bg-white text-teal-600 font-semibold"

@@ -3,7 +3,7 @@ import InputFeild from "./InputFeild";
 
 function WorkInput() {
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6" style={{ maxHeight: '80vh', overflowY: 'auto' }}>
 
       
       <div className="border border-[#20B2AA] p-4 rounded-lg">

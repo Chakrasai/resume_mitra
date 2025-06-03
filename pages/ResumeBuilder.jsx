@@ -9,28 +9,25 @@ function ResumeBuilder() {
 
   return (
     <div className="min-h-screen bg-gray-50 relative">
-      {/* Menu Icon for mobile */}
-      <button
-        onClick={() => setSidebarOpen(!isSidebarOpen)}
-        className="md:hidden absolute top-5 left-4 z-50 text-2xl bg-white p-2 rounded shadow"
-      >
-        <i className="ri-menu-line"></i>
-      </button>
+      <div className="md:hidden bg-white border-b border-gray-200 px-4 py-3">
+        <button
+          onClick={() => setSidebarOpen(!isSidebarOpen)}
+          className="md:hidden text-2xl bg-white p-2 rounded shadow"
+        >
+          <i className="ri-menu-line"></i>
+        </button>
+      </div>
 
-      {/* Add min-h-screen here to fix sidebar height */}
       <div className="flex flex-col md:flex-row min-h-screen">
-        {/* Sidebar */}
-        <div className="md:w-1/5 z-40">
-          <Sidebar selected={selected} setSelected={setSelected} isOpen={isSidebarOpen} />
+        <div className="md:w-1/5 z-30 md:relative md:pt-8 md:pl-4 flex justify-center items-center bg-gray-100 md:pr-6">
+          <Sidebar selected={selected} setSelected={setSelected} isOpen={isSidebarOpen} setIsOpen={setSidebarOpen} />
         </div>
 
-        {/* Content section */}
-        <div className="md:w-3/5 px-4 py-6">
+        <div className="md:w-3/5 px-4 py-8 md:py-10 md:px-8">
           <ContentSection selected={selected} />
         </div>
 
-        {/* Choose Template */}
-        <div className="md:w-1/5 px-4 py-6 flex justify-center items-center bg-gray-100">
+        <div className="md:w-1/5 px-4 py-8 md:py-10 flex justify-center items-center bg-gray-100 md:pr-6">
           <ChooseTemplate />
         </div>
       </div>
