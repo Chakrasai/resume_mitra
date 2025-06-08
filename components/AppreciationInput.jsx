@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import InputFeild from './InputFeild';
+import React, { useState } from "react";
+import InputFeild from "./InputFeild";
 
 function AppreciationInput() {
-  const [certificate, setCertificate] = useState('');
+  const [certificate, setCertificate] = useState("");
   const [certificates, setCertificates] = useState([]);
 
   const handleInputChange = (e) => {
@@ -11,67 +11,67 @@ function AppreciationInput() {
 
   const addCertificate = () => {
     if (certificate.trim()) {
-      setCertificates([...certificates, certificate.trim()]);
-      setCertificate('');
+      setCertificates((prev) => [...prev, certificate.trim()]);
+      setCertificate("");
     }
   };
 
   const removeCertificate = (index) => {
-    const updated = [...certificates];
-    updated.splice(index, 1);
+    const updated = certificates.filter((_, i) => i !== index);
     setCertificates(updated);
   };
 
   return (
-    <div className="p-6">
-      <h3 className="text-xl font-semibold mb-2 text-gray-800">Certifications and Licenses</h3>
-      <p className="text-sm text-gray-600 mb-4">
-        If the job requires you to have certain certifications or licenses, mention them below.
-      </p>
-
-      <div className="flex flex-col md:flex-row gap-4 items-start mb-4">
-        
-        <div className="w-full md:w-2/3">
-          <InputFeild
-            name=""
-            type="text"
-            iconClass="ri-certificate-line"
-            placeholder="Enter certification or license"
-          />
-          <input
-            type="text"
-            value={certificate}
-            onChange={handleInputChange}
-            className="mt-[-2.5rem] opacity-0 absolute"
-          />
+    <div className="flex flex-col gap-6" style={{ maxHeight: "80vh", overflowY: "auto" }}>
+      <div className="border p-4 rounded-lg space-y-4 relative">
+        <div className="mb-4">
+          <h3 className="text-xl font-semibold text-gray-800">Certifications and Licenses</h3>
+          <p className="text-sm text-gray-600">
+            If the job requires you to have certain certifications or licenses, mention them below.
+          </p>
         </div>
 
-        <button
-          onClick={addCertificate}
-          className="flex items-center gap-2 bg-teal-500 text-white px-4 py-2 rounded-md hover:bg-teal-600"
-        >
-          <i className="ri-add-circle-fill text-lg" />
-          <span>Add Certificate</span>
-        </button>
-      </div>
+        <div className="flex flex-col md:flex-row gap-4 items-start mb-4">
+          <div className="w-full md:w-2/3">
+            <div className="relative">
+              <i className="ri-certificate-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <input
+                type="text"
+                name="certificate"
+                value={certificate}
+                onChange={handleInputChange}
+                placeholder="Enter certification or license"
+                className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded"
+              />
+            </div>
+          </div>
 
-      
-      <ul className="space-y-2">
-        {certificates.map((cert, index) => (
-          <li
-            key={index}
-            className="flex justify-between items-center bg-gray-100 border border-gray-300 px-4 py-2 rounded-md"
+          <button
+            onClick={addCertificate}
+            className="flex items-center gap-2 bg-teal-500 text-white px-4 py-2 rounded-md hover:bg-teal-600"
           >
-            <span>{cert}</span>
-            <button
-              onClick={() => removeCertificate(index)}
-              className="text-red-500 hover:text-red-700"
+            <i className="ri-add-circle-fill text-lg" />
+            <span>Add Certificate</span>
+          </button>
+        </div>
+
+        <ul className="space-y-2">
+          {certificates.map((cert, index) => (
+            <li
+              key={index}
+              className="flex justify-between items-center bg-gray-100 border border-gray-300 px-4 py-2 rounded-md"
             >
-              Remove
-            </button>
-          </li>
-        ))}
-      </ul>
+              <span>{cert}</span>
+              <button
+                onClick={() => removeCertificate(index)}
+                className="text-red-500 hover:text-red-700"
+              >
+                Remove
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

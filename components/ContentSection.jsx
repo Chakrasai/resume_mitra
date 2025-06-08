@@ -7,7 +7,7 @@ import WorkInput from "./WorkInput";
 function ContentSection({ selected }) {
 return (
   <div className="flex-1 p-3 bg-white rounded-lg shadow-md h-full overflow-y-auto" style={{ scrollBehavior: "smooth" }}>
-    <h2 className="text-2xl font-semibold mb-4">{selected}</h2>
+
     {selected === "About me" && (
       <AboutmeInput />
     )}

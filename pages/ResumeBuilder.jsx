@@ -12,23 +12,21 @@ function ResumeBuilder() {
       <div className="md:hidden bg-white border-b border-gray-200 px-4 py-3">
         <button
           onClick={() => setSidebarOpen(!isSidebarOpen)}
-          className="md:hidden text-2xl bg-white p-2 rounded shadow"
+          className="text-2xl bg-white p-2 rounded shadow"
         >
           <i className="ri-menu-line"></i>
         </button>
       </div>
 
       <div className="flex flex-col md:flex-row min-h-screen">
-        <div className="md:w-1/5 z-30 md:relative md:pt-8 md:pl-4 flex justify-center items-center bg-gray-100 md:pr-6">
-          <Sidebar selected={selected} setSelected={setSelected} isOpen={isSidebarOpen} setIsOpen={setSidebarOpen} />
+        <div className={`fixed inset-0 z-40 bg-opacity-30 transition-opacity md:static md:bg-transparent md:z-0 ${isSidebarOpen ? '' : 'hidden'} md:block`}>
+          <div className="w-64 md:w-full h-full md:h-auto md:pt-8 md:pl-4 flex justify-center items-center md:relative md:pr-6">
+            <Sidebar selected={selected} setSelected={setSelected} isOpen={isSidebarOpen} setIsOpen={setSidebarOpen} />
+          </div>
         </div>
 
-        <div className="md:w-3/5 px-4 py-8 md:py-10 md:px-8">
+        <div className="flex-1 px-4 py-8 md:py-10 md:px-8 md:ml-0">
           <ContentSection selected={selected} />
-        </div>
-
-        <div className="md:w-1/5 px-4 py-8 md:py-10 flex justify-center items-center bg-gray-100 md:pr-6">
-          <ChooseTemplate />
         </div>
       </div>
     </div>
