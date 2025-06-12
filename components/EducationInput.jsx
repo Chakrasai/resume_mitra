@@ -40,7 +40,7 @@ function EducationInput() {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md max-w-2xl mx-auto">
+    <div style={{ maxHeight: "80vh", overflowY: "auto" }}>
       <h2 className="text-xl font-semibold mb-4 text-gray-800">Enter The Education Details:</h2>
 
       {educations.map((edu, index) => (
@@ -48,8 +48,9 @@ function EducationInput() {
           <button
             onClick={() => removeEducation(index)}
             className="absolute top-2 right-2 text-red-500 hover:text-red-700 text-sm"
+            style={{ fontSize: '1.5rem' }}
           >
-            Remove
+            <i className="ri-delete-bin-line"></i>
           </button>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

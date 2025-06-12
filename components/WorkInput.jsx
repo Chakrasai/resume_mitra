@@ -51,18 +51,22 @@ function WorkInput() {
   };
 
   return (
-    <div className="flex flex-col gap-6" style={{ maxHeight: "80vh", overflowY: "auto" }}>
+    <div className="flex flex-col gap-3" style={{ maxHeight: "80vh", overflowY: "auto" }}>
+      <h2 className="text-xl font-semibold mb-4 text-gray-800">
+        Enter The Work Experience Details:
+      </h2>
       {experiences.map((exp, index) => (
         <div key={index} className="border p-4 rounded-lg space-y-4 relative">
           <button
             onClick={() => removeExperience(index)}
             className="absolute top-2 right-2 text-red-500 hover:text-red-700 text-sm"
+            style={{ fontSize: "1.5rem" }}
           >
-            Remove
+            <i className="ri-delete-bin-line"></i>
           </button>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <label className="flex flex-col gap-1 text-sm text-[#303030]/90">
+            <label className="flex flex-col gap-1 text-sm text-[#303030]/90 font-semibold">
               Profile
               <InputFeild
                 type="text"
@@ -72,7 +76,7 @@ function WorkInput() {
                 onChange={(e) => handleChange(index, "profile", e.target.value)}
               />
             </label>
-            <label className="flex flex-col gap-1 text-sm text-[#303030]/90">
+            <label className="flex flex-col gap-1 text-sm text-[#303030]/90 font-semibold">
               Company
               <InputFeild
                 type="text"
@@ -86,7 +90,7 @@ function WorkInput() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="flex flex-col gap-1 text-sm text-[#303030]/90">
+              <label className="flex flex-col gap-1 text-sm text-[#303030]/90 font-semibold">
                 From
                 <input
                   type="month"
@@ -100,7 +104,7 @@ function WorkInput() {
 
             {!exp.isPresent && (
               <div>
-                <label className="flex flex-col gap-1 text-sm text-[#303030]/90">
+                <label className="flex flex-col gap-1 text-sm text-[#303030]/90 font-semibold">
                   To
                   <input
                     type="month"
@@ -125,7 +129,7 @@ function WorkInput() {
           </label>
 
           <div>
-            <label className="text-sm font-medium text-gray-700">Summary</label>
+            <label className="text-sm font-medium text-gray-700 font-semibold">Summary</label>
             <textarea
               placeholder="Summary"
               rows={4}

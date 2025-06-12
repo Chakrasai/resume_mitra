@@ -66,7 +66,7 @@ function AppreciationInput() {
                 onClick={() => removeCertificate(index)}
                 className="text-red-500 hover:text-red-700"
               >
-                Remove
+                <i className="ri-delete-bin-line"></i>
               </button>
             </li>
           ))}

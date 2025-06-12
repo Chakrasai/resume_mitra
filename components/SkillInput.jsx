@@ -33,7 +33,7 @@ function SkillsInput() {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 font-semibold border rounded-md bg-white space-y-6 max-w-5xl mx-auto w-full" style={{ maxHeight: '80vh', overflowY: 'auto' }}>
       <h3 className="text-xl font-semibold mb-4 text-gray-800">Skills</h3>
 
       <div className="flex flex-col md:flex-row md:items-center gap-4 mb-4 flex-wrap">
@@ -98,7 +98,7 @@ function SkillsInput() {
               onClick={() => removeSkill(index)}
               className="text-red-500 hover:text-red-700"
             >
-              Remove
+              <i className="ri-delete-bin-fill"></i>
             </button>
           </li>
         ))}

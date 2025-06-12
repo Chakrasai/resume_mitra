@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import InputFeild from './InputFeild';
 
 function AboutmeInput() {
-  const [image,setimage] = useState('/user-fill.png')
+  const [image,setimage] = useState('/profile.svg')
   const fileInputRef = useRef(null);
 
   const handleImageChange = (e) =>{
@@ -25,15 +25,15 @@ function AboutmeInput() {
     <div className="p-4 sm:p-6 rounded-md bg-white space-y-6 max-w-5xl mx-auto w-full" style={{ maxHeight: '80vh', overflowY: 'auto' }}>
       
       <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
-        <div className='relative group'>
+        <div className="relative group rounded-full w-28 h-28 min-w-[7rem] min-h-[7rem] flex items-center justify-center overflow-hidden">
           <img
             src={image}
             alt="profile"
-            className="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover border-teal-500"
+            className="rounded-full object-cover w-full h-full"
           />
           <div
             onClick={handlefileupload}
-            className="absolute inset-0 bg-black bg-opacity-10 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-50 cursor-pointer transition-opacity"
+            className="text-white absolute inset-0 bg-opacity-10 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-70 cursor-pointer transition-opacity"
           >
             <i className="ri-upload-2-line text-white text-2xl"></i>
           </div>
