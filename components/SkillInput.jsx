@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import "remixicon/fonts/remixicon.css";
 
-const iconOptions = [
-  'ri-code-line',
-  'ri-brush-line',
-  'ri-database-line',
-  'ri-smartphone-line',
-  'ri-terminal-line',
-  'ri-tools-line'
+const lineIcons = [
+  'ri-code-line', 'ri-brush-line', 'ri-database-line',
+  'ri-smartphone-line', 'ri-terminal-line', 'ri-tools-line',
+  'ri-pencil-line', 'ri-server-line', 'ri-settings-line'
+];
+
+const fillIcons = [
+  'ri-code-s-fill', 'ri-brush-fill', 'ri-database-2-fill',
+  'ri-smartphone-fill', 'ri-terminal-box-fill', 'ri-tools-fill',
+  'ri-pencil-fill', 'ri-server-fill', 'ri-settings-5-fill'
 ];
 
 function SkillsInput() {
@@ -16,6 +19,8 @@ function SkillsInput() {
   const [skillTitle, setSkillTitle] = useState('');
   const [skillItems, setSkillItems] = useState('');
   const [showIconPicker, setShowIconPicker] = useState(false);
+  const [iconTab, setIconTab] = useState('line');
+  const [search, setSearch] = useState('');
 
   const addSkill = () => {
     if (skillTitle.trim() && skillItems.trim()) {
@@ -32,31 +37,20 @@ function SkillsInput() {
     setSkills(updated);
   };
 
+  const filteredIcons = (iconTab === 'line' ? lineIcons : fillIcons).filter(ic =>
+    ic.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
-    <div className="p-6 font-semibold border rounded-md bg-white space-y-6 max-w-5xl mx-auto w-full" style={{ maxHeight: '80vh', overflowY: 'auto' }}>
+    <div className="p-6 font-semibold border rounded-md bg-white space-y-6 max-w-5xl mx-auto w-full">
       <h3 className="text-xl font-semibold mb-4 text-gray-800">Skills</h3>
 
       <div className="flex flex-col md:flex-row md:items-center gap-4 mb-4 flex-wrap">
         <div className="relative">
           <i
             className={`${icon} text-2xl cursor-pointer px-3 py-2 border border-teal-500 rounded-md bg-white`}
-            onClick={() => setShowIconPicker(!showIconPicker)}
+            onClick={() => setShowIconPicker(true)}
           ></i>
-
-          {showIconPicker && (
-            <div className="absolute top-12 left-0 bg-white border shadow-md rounded p-2 grid grid-cols-3 gap-2 z-50 w-48">
-              {iconOptions.map((iconClass) => (
-                <i
-                  key={iconClass}
-                  className={`${iconClass} text-xl cursor-pointer hover:text-teal-600 p-1 rounded transition-colors`}
-                  onClick={() => {
-                    setIcon(iconClass);
-                    setShowIconPicker(false);
-                  }}
-                ></i>
-              ))}
-            </div>
-          )}
         </div>
 
         <input
@@ -83,7 +77,7 @@ function SkillsInput() {
         </button>
       </div>
 
-      {/* Display Skills */}
+      {/* Skill List */}
       <ul className="space-y-2">
         {skills.map((skill, index) => (
           <li
@@ -103,6 +97,57 @@ function SkillsInput() {
           </li>
         ))}
       </ul>
+
+      {/* Icon Picker Modal */}
+      {showIconPicker && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm">
+          <div className="bg-white w-96 max-h-[80vh] p-4 rounded-lg shadow-xl overflow-y-auto relative">
+            <div className="flex justify-between items-center mb-3">
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setIconTab('line')}
+                  className={`px-3 py-1 rounded-md ${iconTab === 'line' ? 'bg-teal-500 text-white' : 'bg-gray-200 text-gray-800'}`}
+                >
+                  Line Icon
+                </button>
+                <button
+                  onClick={() => setIconTab('fill')}
+                  className={`px-3 py-1 rounded-md ${iconTab === 'fill' ? 'bg-teal-500 text-white' : 'bg-gray-200 text-gray-800'}`}
+                >
+                  Fill Icon
+                </button>
+              </div>
+              <button onClick={() => setShowIconPicker(false)} className="text-gray-500 hover:text-black">
+                <i className="ri-close-line text-2xl"></i>
+              </button>
+            </div>
+
+            {/* Search */}
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search icon..."
+              className="w-full border border-gray-300 rounded-md px-3 py-2 mb-3"
+            />
+
+            {/* Icons */}
+            <div className="grid grid-cols-4 gap-3">
+              {filteredIcons.map((iconClass) => (
+                <i
+                  key={iconClass}
+                  className={`${iconClass} text-xl p-2 border rounded cursor-pointer hover:bg-teal-100`}
+                  onClick={() => {
+                    setIcon(iconClass);
+                    setShowIconPicker(false);
+                    setSearch('');
+                  }}
+                ></i>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
