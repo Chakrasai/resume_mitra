@@ -37,9 +37,11 @@ function SkillsInput() {
     setSkills(updated);
   };
 
-  const filteredIcons = (iconTab === 'line' ? lineIcons : fillIcons).filter(ic =>
-    ic.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredIcons = search
+    ? [...lineIcons, ...fillIcons].filter(ic =>
+        ic.toLowerCase().includes(search.toLowerCase())
+      )
+    : (iconTab === 'line' ? lineIcons : fillIcons);
 
   return (
     <div className="p-6 font-semibold border rounded-md bg-white space-y-6 max-w-5xl mx-auto w-full">
