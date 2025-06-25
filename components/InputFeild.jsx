@@ -7,6 +7,7 @@ const InputFeild = ({ type, placeholder, iconClass }) => {
       <i className={`${iconClass} text-[#6D6868]/80 mr-2 text-xl`}></i>
       <input
         type={type}
+        
         placeholder={placeholder}
         className="w-full outline-none text-[16px] text-[#303030]/90 bg-transparent"
       />

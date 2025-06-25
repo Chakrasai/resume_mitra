@@ -5,6 +5,8 @@ function AboutmeInput() {
   const [image,setimage] = useState('/profile.svg')
   const fileInputRef = useRef(null);
 
+  // const [candidate, setCandidate] = useState({});
+
   const handleImageChange = (e) =>{
     const file = e.target.files[0];
     if(file && file.type.startsWith('image/')){
@@ -20,6 +22,18 @@ function AboutmeInput() {
     fileInputRef.current.click();
   }
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const res = await fetch('/api/candidate');
+  //       const data = await res.json();
+  //       setCandidate(data.candidate);
+  //     } catch (error) {
+  //       console.error('Error fetching candidate data:', error);
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
 
   return (
     <div className="p-4 sm:p-6 rounded-md bg-white space-y-6 max-w-5xl mx-auto w-full" style={{ maxHeight: '80vh', overflowY: 'auto' }}>
@@ -33,6 +47,7 @@ function AboutmeInput() {
           />
           <div
             onClick={handlefileupload}
+            
             className="text-white absolute inset-0 bg-opacity-10 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-70 cursor-pointer transition-opacity"
           >
             <i className="ri-upload-2-line text-white text-2xl"></i>
@@ -51,7 +66,7 @@ function AboutmeInput() {
         <div className="flex flex-col gap-4 w-full">
           <div>
             <label className="text-sm font-medium text-gray-700">Full Name</label>
-            <InputFeild type="text" placeholder="Enter your full name" iconClass="ri-user-line" />
+            <InputFeild type="text" placeholder="Enter your full name" iconClass="ri-user-line"/>
           </div>
         </div>
       </div>
