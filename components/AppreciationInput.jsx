@@ -1,9 +1,26 @@
-import React, { useState } from "react";
-import InputFeild from "./InputFeild";
+import React, { useEffect, useState } from "react";
 
 function AppreciationInput() {
   const [certificate, setCertificate] = useState("");
   const [certificates, setCertificates] = useState([]);
+
+  // Fetch data from API
+  useEffect(() => {
+    const fetchCertificates = async () => {
+      try {
+        const res = await fetch("https://itn-dev-rm-be-35683800078.us-west1.run.app/121/13");
+        const data = await res.json();
+
+        // Assuming: data.certificate is an array of objects like [{ id: ..., title: "..." }]
+        const certTitles = data?.certificate?.map(c => c.title) || [];
+        setCertificates(certTitles);
+      } catch (err) {
+        console.error("Error fetching certifications:", err);
+      }
+    };
+
+    fetchCertificates();
+  }, []);
 
   const handleInputChange = (e) => {
     setCertificate(e.target.value);

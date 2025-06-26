@@ -1,4 +1,4 @@
-const InputFeild = ({ type, placeholder, iconClass }) => {
+const InputFeild = ({ type, placeholder, iconClass, value, onChange }) => {
   return (
     <div
       className="w-full flex items-center border border-[#20B2AA] py-2 px-4 rounded-lg"
@@ -7,7 +7,8 @@ const InputFeild = ({ type, placeholder, iconClass }) => {
       <i className={`${iconClass} text-[#6D6868]/80 mr-2 text-xl`}></i>
       <input
         type={type}
-        
+        value={value}           
+        onChange={onChange}     
         placeholder={placeholder}
         className="w-full outline-none text-[16px] text-[#303030]/90 bg-transparent"
       />

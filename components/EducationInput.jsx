@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import InputFeild from './InputFeild';
 
 function EducationInput() {
@@ -11,6 +11,29 @@ function EducationInput() {
       isPresent: false
     }
   ]);
+
+  useEffect(() => {
+    const fetchEducation = async () => {
+      try {
+        const res = await fetch('https://itn-dev-rm-be-35683800078.us-west1.run.app/121/13');
+        const data = await res.json();
+        if (data.education && data.education.length > 0) {
+          const mappedEducation = data.education.map((edu) => ({
+            degree: edu.degree || '',
+            institute: edu.institution || '',
+            startDate: edu.start_date || '',
+            endDate: edu.end_date || '',
+            isPresent: edu.is_currently === 1
+          }));
+          setEducations(mappedEducation);
+        }
+      } catch (error) {
+        console.error('Error fetching education data:', error);
+      }
+    };
+
+    fetchEducation();
+  }, []);
 
   const handleChange = (index, field, value) => {
     const updated = [...educations];

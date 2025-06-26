@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import InputFeild from "./InputFeild";
 
 function WorkInput() {
@@ -12,6 +12,30 @@ function WorkInput() {
       summary: ""
     }
   ]);
+
+  useEffect(() => {
+    const fetchExperience = async () => {
+      try {
+        const res = await fetch("https://itn-dev-rm-be-35683800078.us-west1.run.app/121/13");
+        const data = await res.json();
+        if (data.experience && Array.isArray(data.experience)) {
+          const formattedExperience = data.experience.map((exp) => ({
+            profile: exp.role || "",
+            company: exp.company || "",
+            fromDate: exp.start_date || "",
+            toDate: exp.end_date || "",
+            isPresent: exp.is_currently || false,
+            summary: exp.description || ""
+          }));
+          setExperiences(formattedExperience);
+        }
+      } catch (error) {
+        console.error("Error fetching experience data:", error);
+      }
+    };
+
+    fetchExperience();
+  }, []);
 
   const handleDateChange = (e, index, type) => {
     const value = e.target.value;
