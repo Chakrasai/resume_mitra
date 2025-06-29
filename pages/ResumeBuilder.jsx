@@ -12,6 +12,7 @@ function ResumeBuilder() {
       <div className="md:hidden bg-white border-b border-gray-200 px-4 py-3">
         <button
           onClick={() => setSidebarOpen(!isSidebarOpen)}
+          title='Toggle Sidebar'
           className="text-2xl bg-white p-2 rounded shadow"
         >
           <i className="ri-menu-line"></i>

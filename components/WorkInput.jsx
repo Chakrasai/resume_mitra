@@ -9,25 +9,34 @@ function WorkInput() {
       fromDate: "",
       toDate: "",
       isPresent: false,
-      summary: ""
-    }
+      summary: "",
+    },
   ]);
+
+  // Converts "May 2025" -> "2025-05"
+  const getInputValue = (monthYearString) => {
+    if (!monthYearString || monthYearString === "Present") return "";
+    const [monthName, year] = monthYearString.split(" ");
+    const monthNumber = new Date(`${monthName} 1, ${year}`).getMonth() + 1;
+    return `${year}-${String(monthNumber).padStart(2, "0")}`;
+  };
 
   useEffect(() => {
     const fetchExperience = async () => {
       try {
-        const res = await fetch("https://itn-dev-rm-be-35683800078.us-west1.run.app/121/13");
+        const res = await fetch(`${import.meta.env.VITE_USER_DATA}`);
         const data = await res.json();
+
         if (data.experience && Array.isArray(data.experience)) {
-          const formattedExperience = data.experience.map((exp) => ({
+          const formatted = data.experience.map((exp) => ({
             profile: exp.role || "",
             company: exp.company || "",
             fromDate: exp.start_date || "",
             toDate: exp.end_date || "",
             isPresent: exp.is_currently || false,
-            summary: exp.description || ""
+            summary: exp.description || "",
           }));
-          setExperiences(formattedExperience);
+          setExperiences(formatted);
         }
       } catch (error) {
         console.error("Error fetching experience data:", error);
@@ -64,8 +73,8 @@ function WorkInput() {
         fromDate: "",
         toDate: "",
         isPresent: false,
-        summary: ""
-      }
+        summary: "",
+      },
     ]);
   };
 
@@ -76,9 +85,8 @@ function WorkInput() {
 
   return (
     <div className="flex flex-col gap-3" style={{ maxHeight: "80vh", overflowY: "auto" }}>
-      <h2 className="text-xl font-semibold mb-4 text-gray-800">
-        Enter The Work Experience Details:
-      </h2>
+      <h2 className="text-xl font-semibold mb-4 text-gray-800">Enter The Work Experience Details:</h2>
+
       {experiences.map((exp, index) => (
         <div key={index} className="border p-4 rounded-lg space-y-4 relative">
           <button
@@ -100,6 +108,7 @@ function WorkInput() {
                 onChange={(e) => handleChange(index, "profile", e.target.value)}
               />
             </label>
+
             <label className="flex flex-col gap-1 text-sm text-[#303030]/90 font-semibold">
               Company
               <InputFeild
@@ -118,9 +127,10 @@ function WorkInput() {
                 From
                 <input
                   type="month"
+                  value={getInputValue(exp.fromDate)}
                   onChange={(e) => handleDateChange(e, index, "fromDate")}
-                  style={{ boxShadow: "0 6px 8px rgba(0, 0, 0, 0.2)" }}
                   className="p-2 border rounded outline-none border-[#20B2AA]"
+                  style={{ boxShadow: "0 6px 8px rgba(0, 0, 0, 0.2)" }}
                 />
                 {exp.fromDate && <p className="text-xs mt-1 text-gray-600">{exp.fromDate}</p>}
               </label>
@@ -132,9 +142,10 @@ function WorkInput() {
                   To
                   <input
                     type="month"
+                    value={getInputValue(exp.toDate)}
                     onChange={(e) => handleDateChange(e, index, "toDate")}
-                    style={{ boxShadow: "0 6px 8px rgba(0, 0, 0, 0.2)" }}
                     className="p-2 border rounded outline-none border-[#20B2AA]"
+                    style={{ boxShadow: "0 6px 8px rgba(0, 0, 0, 0.2)" }}
                   />
                   {exp.toDate && <p className="text-xs mt-1 text-gray-600">{exp.toDate}</p>}
                 </label>
@@ -157,10 +168,10 @@ function WorkInput() {
             <textarea
               placeholder="Summary"
               rows={4}
-              style={{ boxShadow: "0 6px 8px rgba(0, 0, 0, 0.2)" }}
-              className="w-full p-4 border border-[#20B2AA] rounded-lg text-sm shadow-sm outline-none text-[#303030]/90 resize-none"
               value={exp.summary}
               onChange={(e) => handleChange(index, "summary", e.target.value)}
+              className="w-full p-4 border border-[#20B2AA] rounded-lg text-sm shadow-sm outline-none text-[#303030]/90 resize-none"
+              style={{ boxShadow: "0 6px 8px rgba(0, 0, 0, 0.2)" }}
             />
           </div>
         </div>

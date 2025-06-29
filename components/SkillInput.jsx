@@ -25,7 +25,7 @@ function SkillsInput() {
   useEffect(() => {
     const fetchSkills = async () => {
       try {
-        const res = await fetch('https://itn-dev-rm-be-35683800078.us-west1.run.app/121/13');
+        const res = await fetch(`${import.meta.env.VITE_USER_DATA}`);
         const data = await res.json();
         if (data.skills) {
           const formatted = data.skills.map(skill => ({

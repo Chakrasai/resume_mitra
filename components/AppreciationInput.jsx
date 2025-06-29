@@ -8,7 +8,7 @@ function AppreciationInput() {
   useEffect(() => {
     const fetchCertificates = async () => {
       try {
-        const res = await fetch("https://itn-dev-rm-be-35683800078.us-west1.run.app/121/13");
+        const res = await fetch(`${import.meta.env.VITE_USER_DATA}`);
         const data = await res.json();
 
         // Assuming: data.certificate is an array of objects like [{ id: ..., title: "..." }]

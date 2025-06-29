@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, use } from 'react';
 import InputFeild from './InputFeild';
 
 function AboutmeInput() {
@@ -16,7 +16,9 @@ function AboutmeInput() {
     summary: '',
   });
 
-  // 🟢 Handle file upload and preview
+
+
+  
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file && file.type.startsWith('image/')) {
@@ -33,11 +35,11 @@ function AboutmeInput() {
     fileInputRef.current.click();
   };
 
-  // ✅ Fetch data and set state
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch('https://itn-dev-rm-be-35683800078.us-west1.run.app/121/13'); // Replace with your API URL
+        const res = await fetch(`${import.meta.env.VITE_USER_DATA}`); 
         const data = await res.json();
 
         const candidateData = data.candidate;
@@ -50,7 +52,7 @@ function AboutmeInput() {
           city: candidateData.address || '',
           email: candidateData.email || '',
           phone: candidateData.phone || '',
-          portfolio_url: candidateData.protfolio_url || '',
+          portfolio_url: candidateData.portfolio_url || '',
           summary: summary,
         });
 

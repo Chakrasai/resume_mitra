@@ -8,14 +8,31 @@ function EducationInput() {
       institute: '',
       startDate: '',
       endDate: '',
-      isPresent: false
-    }
+      isPresent: false,
+    },
   ]);
+
+  // Convert "May 2024" => "2024-05"
+  const toInputFormat = (monthYear) => {
+    if (!monthYear || monthYear === "Present") return "";
+    const [monthName, year] = monthYear.split(" ");
+    const monthNum = new Date(`${monthName} 1, ${year}`).getMonth() + 1;
+    return `${year}-${String(monthNum).padStart(2, "0")}`;
+  };
+
+  // Convert "YYYY-MM" => "Month YYYY"
+  const toDisplayFormat = (dateStr) => {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+    });
+  };
 
   useEffect(() => {
     const fetchEducation = async () => {
       try {
-        const res = await fetch('https://itn-dev-rm-be-35683800078.us-west1.run.app/121/13');
+        const res = await fetch(`${import.meta.env.VITE_USER_DATA}`);
         const data = await res.json();
         if (data.education && data.education.length > 0) {
           const mappedEducation = data.education.map((edu) => ({
@@ -23,7 +40,7 @@ function EducationInput() {
             institute: edu.institution || '',
             startDate: edu.start_date || '',
             endDate: edu.end_date || '',
-            isPresent: edu.is_currently === 1
+            isPresent: edu.is_currently === 1,
           }));
           setEducations(mappedEducation);
         }
@@ -37,10 +54,17 @@ function EducationInput() {
 
   const handleChange = (index, field, value) => {
     const updated = [...educations];
-    updated[index][field] = value;
-    if (field === 'isPresent' && value) {
-      updated[index]['endDate'] = '';
+
+    if (field === "startDate" || field === "endDate") {
+      const formatted = toDisplayFormat(value);
+      updated[index][field] = formatted;
+    } else if (field === "isPresent" && value) {
+      updated[index]["endDate"] = "";
+      updated[index][field] = value;
+    } else {
+      updated[index][field] = value;
     }
+
     setEducations(updated);
   };
 
@@ -52,8 +76,8 @@ function EducationInput() {
         institute: '',
         startDate: '',
         endDate: '',
-        isPresent: false
-      }
+        isPresent: false,
+      },
     ]);
   };
 
@@ -85,7 +109,6 @@ function EducationInput() {
                 value={edu.degree}
                 onChange={(e) => handleChange(index, 'degree', e.target.value)}
                 placeholder="e.g. B.Sc Computer Science"
-                className="w-full border border-gray-300 rounded px-3 py-2"
               />
             </div>
 
@@ -97,33 +120,34 @@ function EducationInput() {
                 value={edu.institute}
                 onChange={(e) => handleChange(index, 'institute', e.target.value)}
                 placeholder="e.g. XYZ University"
-                className="w-full border border-gray-300 rounded px-3 py-2"
               />
             </div>
 
             <div>
               <label className="text-sm font-medium text-gray-700">Starting Date</label>
-              <InputFeild
-                type="date"
+              <input
+                type="month"
                 name="startDate"
-                value={edu.startDate}
+                value={toInputFormat(edu.startDate)}
                 onChange={(e) => handleChange(index, 'startDate', e.target.value)}
                 className="w-full border border-gray-300 rounded px-3 py-2"
               />
+              {edu.startDate && <p className="text-xs mt-1 text-gray-600">{edu.startDate}</p>}
             </div>
 
             <div>
               <label className="text-sm font-medium text-gray-700">Ending Date</label>
-              <InputFeild
-                type="date"
+              <input
+                type="month"
                 name="endDate"
-                value={edu.endDate}
+                value={toInputFormat(edu.endDate)}
                 onChange={(e) => handleChange(index, 'endDate', e.target.value)}
                 disabled={edu.isPresent}
                 className={`w-full border px-3 py-2 rounded ${
                   edu.isPresent ? 'bg-gray-100 cursor-not-allowed' : 'border-gray-300'
                 }`}
               />
+              {edu.endDate && !edu.isPresent && <p className="text-xs mt-1 text-gray-600">{edu.endDate}</p>}
             </div>
           </div>
 
@@ -135,7 +159,7 @@ function EducationInput() {
               onChange={(e) => handleChange(index, 'isPresent', e.target.checked)}
               className="mr-2"
             />
-            <label htmlFor="present" className="text-sm text-gray-700">I currently study here</label>
+            <label className="text-sm text-gray-700">I currently study here</label>
           </div>
         </div>
       ))}
